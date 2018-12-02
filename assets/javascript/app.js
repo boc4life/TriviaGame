@@ -15,7 +15,7 @@ var game = {
         picture: "assets/images/sleepy.jpg"
     },
     {
-        display: "Who recorded the 1958 Christmas classic Rockin Around The Christmas Tree?",
+        display: "Which singer recorded the 1958 Christmas classic Rockin' Around The Christmas Tree?",
         choice1: "Brenda Lee",
         choice2: "Nancy Sinatra",
         choice3: "Billie Holliday",
@@ -32,11 +32,12 @@ var game = {
   })
 
   function startGame() {
-    var correctGuess = 0;
-    var incorrectGuess = 0;
-    var timeoutGuess = 0;
-    var currentQuestion = 0;
+    correctGuess = 0;
+    incorrectGuess = 0;
+    timeoutGuess = 0;
+    currentQuestion = 0;
 
+    $("#welcome").empty();
     $("#question").html(game.questions[currentQuestion].display);
     $("#choice1").html(game.questions[currentQuestion].choice1).attr("value", game.questions[currentQuestion].choice1);
     $("#choice2").html(game.questions[currentQuestion].choice2).attr("value", game.questions[currentQuestion].choice2);

@@ -14,17 +14,24 @@
         <div class ="card-header">
             <h1>Welcome to Trivia!</h1>
             <br>
-            <h3>Do your best to answer the following questions. 30 seconds for each question. No cheating!</h3>
+            <span id="welcome"><h3>Do your best to answer the following questions. 30 seconds for each question. No cheating!</h3></span>
         </div>
         <div class ="card-body">
             <h4>Time Remaining: <span id="timer">30</span> Seconds
             <br><br>
-            <span id ="question">Click here to start!</span>
+            <span id ="question">Choose a topic below to get started</span>
             <br>
-            <div id ="choice1" class ="option">Choice 1</div>
-            <div id ="choice2" class ="option">Choice 2</div>
-            <div id ="choice3" class ="option">Choice 3</div>
-            <div id ="choice4" class ="option">Choice 4</div> </h4>
+            <div id ="choice1" class ="option"></div>
+            <div id ="choice2" class ="option"></div>
+            <div id ="choice3" class ="option"></div>
+            <div id ="choice4" class ="option"></div> </h4>
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown">Topics</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Christmas</a>
+                    <a class="dropdown-item" href="#">Football</a>
+                </div>
+            </div>
         </div>
     </div>
     <script src="assets/javascript/app.js"></script>
