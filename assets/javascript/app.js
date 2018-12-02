@@ -40,35 +40,34 @@ $(document).ready(function(){
     })
     
     // Execute for correct and incorrect selections, only while a question is active to prevent errant clicks in between questions from causing problems
-
+    if (activeQuestion) {
+        $(".option").on("click", function(){
+        remainingQuestions--;
+        console.log(remainingQuestions);
+        selectedAnswer = $(this).text();
+        if (selectedAnswer == game.correctAnswers[currentQuestion]) {
+            correctGuess++;
+            $("#question").html("Correct!");
+            $(".option").empty();
+            $("#choice1").html(game.questions[currentQuestion].fact);
+            $("#choice2").html("<img src=" + game.questions[currentQuestion].picture + ">");
+        }
+        else {
+            incorrectGuess++;
+            $("#question").html("Wrong!");
+            $(".option").empty();
+            $("#choice1").html(game.questions[currentQuestion].fact);
+            $("#choice2").html("<img src=" + game.questions[currentQuestion].picture + ">");
+        }
+        activeQuestion = false;
+        currentQuestion++;
+        setTimeout(nextQuestion, 5000);
+    
+    })
+    }
     
   })
 
-  if (activeQuestion) {
-    $(".option").on("click", function(){
-    remainingQuestions--;
-    console.log(remainingQuestions);
-    selectedAnswer = $(this).text();
-    if (selectedAnswer == game.correctAnswers[currentQuestion]) {
-        correctGuess++;
-        $("#question").html("Correct!");
-        $(".option").empty();
-        $("#choice1").html(game.questions[currentQuestion].fact);
-        $("#choice2").html("<img src=" + game.questions[currentQuestion].picture + ">");
-    }
-    else {
-        incorrectGuess++;
-        $("#question").html("Wrong!");
-        $(".option").empty();
-        $("#choice1").html(game.questions[currentQuestion].fact);
-        $("#choice2").html("<img src=" + game.questions[currentQuestion].picture + ">");
-    }
-    activeQuestion = false;
-    currentQuestion++;
-    setTimeout(nextQuestion, 5000);
-
-})
-}
 
 function startGame() {
     correctGuess = 0;
