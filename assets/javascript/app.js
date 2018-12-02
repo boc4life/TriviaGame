@@ -2,8 +2,9 @@ var correctGuess = 0;
 var incorrectGuess = 0;
 var timeoutGuess = 0;
 var currentQuestion = 0;
+var game;
 
-var game = {
+var christmasGame = {
     questions: [
     {
         display: "Which of the following is NOT one of Santa's Reindeer?",
@@ -26,7 +27,9 @@ var game = {
     correctAnswers: ["Sleepy", "Brenda Lee"]
 }
   $(document).ready(function(){
-    $("#question").on("click", function(){
+    $(".selector").on("click", function(){
+        game = $(this).attr("value");
+        console.log(game);
         startGame();
     })
   })
@@ -36,6 +39,7 @@ var game = {
     incorrectGuess = 0;
     timeoutGuess = 0;
     currentQuestion = 0;
+
 
     $("#welcome").empty();
     $("#question").html(game.questions[currentQuestion].display);
