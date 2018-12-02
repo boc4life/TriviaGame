@@ -40,8 +40,8 @@ $(document).ready(function(){
     })
     
     // Execute for correct and incorrect selections, only while a question is active to prevent errant clicks in between questions from causing problems
-    if (activeQuestion) {
-        $(".option").on("click", function(){
+    $(".option").on("click", function(){
+    if (activeQuestion) {    
         remainingQuestions--;
         console.log(remainingQuestions);
         selectedAnswer = $(this).text();
@@ -62,9 +62,9 @@ $(document).ready(function(){
         activeQuestion = false;
         currentQuestion++;
         setTimeout(nextQuestion, 5000);
-    
-    })
     }
+    })
+
     
   })
 
