@@ -3,6 +3,7 @@ var incorrectGuess = 0;
 var timeoutGuess = 0;
 var currentQuestion = 0;
 var game;
+var remainingQuestions = 0;
 
 var christmasGame = {
     questions: [
@@ -28,9 +29,9 @@ var christmasGame = {
 }
   $(document).ready(function(){
     $(".selector").on("click", function(){
-        game = $(this).attr("value");
-        console.log(game);
+        game = eval($(this).attr("value"));
         startGame();
+        insertTimer();
     })
   })
 
@@ -39,9 +40,13 @@ var christmasGame = {
     incorrectGuess = 0;
     timeoutGuess = 0;
     currentQuestion = 0;
-
+    remainingQuestions = game.questions.length;
 
     $("#welcome").empty();
+    $("#topics").empty();
+  }
+    
+  function nextQuestion() {
     $("#question").html(game.questions[currentQuestion].display);
     $("#choice1").html(game.questions[currentQuestion].choice1).attr("value", game.questions[currentQuestion].choice1);
     $("#choice2").html(game.questions[currentQuestion].choice2).attr("value", game.questions[currentQuestion].choice2);
@@ -63,4 +68,8 @@ var christmasGame = {
             incorrectGuess++;
         }
     })
+  }
+
+  function insertTimer() {
+    $("#timebox").html("Time Remaining: <span id=\"timer\">30</span> Seconds");
   }
