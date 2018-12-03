@@ -23,7 +23,8 @@ var christmasGame = {
         choice2: "Nancy Sinatra",
         choice3: "Billie Holliday",
         choice4: "Dolly Parton",
-        picture: ""
+        fact: "The song has been re-recorded by no fewer than 40 artists since",
+        picture: "assets/images/homealone.gif"
     }
 ],
     correctAnswers: ["Sleepy", "Brenda Lee"],
@@ -76,7 +77,7 @@ function startGame() {
 
     $("#timebox").html("Time Remaining: <span id=\"timer\">30</span> Seconds");
     $("#welcome").empty();
-    $("#topics").empty();
+    $("#topics").hide();
     $("#question").empty();
     $("#gameTitle").html(game.title);
     nextQuestion();
@@ -98,5 +99,11 @@ function nextQuestion() {
   }
 }
 
-
+function endGame() {
+    $("#question").html("That's it! Try another topic!");
+    $("#choice1").html("You got " + correctGuess + " right");
+    $("#choice2").html("You got " + incorrectGuess + " wrong");
+    $("#topics").show();
+    $("#timebox").empty();
+}
 
