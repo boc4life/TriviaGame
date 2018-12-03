@@ -1,10 +1,12 @@
 var correctGuess = 0;
 var incorrectGuess = 0;
-var timeoutGuess = 0;
+var timeouts = 0;
 var currentQuestion = 0;
 var game;
 var remainingQuestions;
 var activeQuestion = false;
+var clock;
+var timer = 30;
 
 var christmasGame = {
     questions: [
@@ -42,7 +44,8 @@ $(document).ready(function(){
     
     // Execute for correct and incorrect selections, only while a question is active to prevent errant clicks in between questions from causing problems
     $(".option").on("click", function(){
-    if (activeQuestion) {    
+    if (activeQuestion) {  
+        clearInterval(clock);  
         remainingQuestions--;
         selectedAnswer = $(this).text();
         if (selectedAnswer == game.correctAnswers[currentQuestion]) {
@@ -54,7 +57,7 @@ $(document).ready(function(){
         }
         else {
             incorrectGuess++;
-            $("#question").html("Wrong!");
+            $("#question").html("Wrong! The correct answer was " + game.correctAnswers[currentQuestion]);
             $(".option").empty();
             $("#choice1").html(game.questions[currentQuestion].fact);
             $("#choice2").html("<img src=" + game.questions[currentQuestion].picture + ">");
@@ -66,11 +69,11 @@ $(document).ready(function(){
     })
 })
 
-
+// Start of game resetting variables
 function startGame() {
     correctGuess = 0;
     incorrectGuess = 0;
-    timeoutGuess = 0;
+    timeouts = 0;
     currentQuestion = 0;
     remainingQuestions = game.questions.length;
     console.log(remainingQuestions);
@@ -95,15 +98,41 @@ function nextQuestion() {
     $("#choice2").html(game.questions[currentQuestion].choice2).attr("value", game.questions[currentQuestion].choice2);
     $("#choice3").html(game.questions[currentQuestion].choice3).attr("value", game.questions[currentQuestion].choice3);
     $("#choice4").html(game.questions[currentQuestion].choice4).attr("value", game.questions[currentQuestion].choice4);
-    // startTimer();
+    startTimer();
   }
 }
 
+// End game function, display results and show topic selector
 function endGame() {
     $("#question").html("That's it! Try another topic!");
     $("#choice1").html("You got " + correctGuess + " right");
     $("#choice2").html("You got " + incorrectGuess + " wrong");
+    $("#choice3").html("You timed out " + timeouts + " times");
     $("#topics").show();
     $("#timebox").empty();
+}
+
+function startTimer() {
+    timer = 30;
+    clock = setInterval(count, 1000);
+}
+
+function count() {
+    if (timer > 0) {
+    timer--;
+    $("#timer").html(timer);
+    }
+    if (timer == 0) {
+        clearInterval(clock);
+        timeouts++;
+        remainingQuestions--;
+        $("#question").html("Out of time! The correct answer was " + game.correctAnswers[currentQuestion]);
+        $(".option").empty();
+        $("#choice1").html(game.questions[currentQuestion].fact);
+        $("#choice2").html("<img src=" + game.questions[currentQuestion].picture + ">");
+        activeQuestion = false;
+        currentQuestion++;
+        setTimeout(nextQuestion, 5000);
+    }
 }
 
