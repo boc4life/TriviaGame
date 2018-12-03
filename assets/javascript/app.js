@@ -34,6 +34,32 @@ var christmasGame = {
     title: "<h1>Christmas Trivia!</h1>"
 }
 
+var footballGame = {
+    questions: [
+    {
+        display: "Who is the NFL's all-time leader in rushing yards?",
+        choice1: "Eric Dickerson",
+        choice2: "Emmitt Smith",
+        choice3: "Walter Payton",
+        choice4: "Jim Brown",
+        fact: "The Cowboys' legend rushed for 18,355 yards in his career, over 1,500 more than #2 on the list, Walter Payton",
+        picture: "assets/images/emmitt.gif"
+    },
+    {
+        display: "Who threw the touchdown pass for the legendary \"Philly Special\" play in Super Bowl LII?",
+        choice1: "Nick Foles",
+        choice2: "Nelson Agholor",
+        choice3: "Corey Clement",
+        choice4: "Trey Burton",
+        fact: "The play gave the Eagles a 22-12 lead en route to their 41-33 victory",
+        picture: "assets/images/phillyspecial.gif"
+    }
+],
+    correctAnswers: ["Emmitt Smith", "Trey Burton"],
+    css: "",
+    title: "<h1>Football Trivia!</h1>"
+}
+
 $(document).ready(function(){
     
     // Start game when dropdown is selected, assign the correct set of properties to the game variable
