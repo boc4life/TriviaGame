@@ -3,7 +3,7 @@ var incorrectGuess = 0;
 var timeoutGuess = 0;
 var currentQuestion = 0;
 var game;
-var remainingQuestions = 0;
+var remainingQuestions;
 var activeQuestion = false;
 
 var christmasGame = {
@@ -43,7 +43,6 @@ $(document).ready(function(){
     $(".option").on("click", function(){
     if (activeQuestion) {    
         remainingQuestions--;
-        console.log(remainingQuestions);
         selectedAnswer = $(this).text();
         if (selectedAnswer == game.correctAnswers[currentQuestion]) {
             correctGuess++;
@@ -64,9 +63,7 @@ $(document).ready(function(){
         setTimeout(nextQuestion, 5000);
     }
     })
-
-    
-  })
+})
 
 
 function startGame() {
@@ -87,7 +84,7 @@ function startGame() {
 
   // Advance to next question. If no questions remaining, execute end of game function.
 function nextQuestion() {
-    if (remainingQuestions = 0) {
+    if (remainingQuestions == 0) {
         endGame();
     }
     else {
@@ -98,7 +95,6 @@ function nextQuestion() {
     $("#choice3").html(game.questions[currentQuestion].choice3).attr("value", game.questions[currentQuestion].choice3);
     $("#choice4").html(game.questions[currentQuestion].choice4).attr("value", game.questions[currentQuestion].choice4);
     // startTimer();
-    console.log(activeQuestion);
   }
 }
 
