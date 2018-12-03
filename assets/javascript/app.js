@@ -8,6 +8,7 @@ var activeQuestion = false;
 var clock;
 var timer = 30;
 
+// Objects defining each game. All future topics and additional questions can easily be added using this template. Be sure to match variable name with the value attribute in HTML.
 var christmasGame = {
     questions: [
     {
@@ -30,7 +31,7 @@ var christmasGame = {
     }
 ],
     correctAnswers: ["Sleepy", "Brenda Lee"],
-    css: "",
+    css: "christmas.css",
     title: "<h1>Christmas Trivia!</h1>"
 }
 
@@ -56,7 +57,7 @@ var footballGame = {
     }
 ],
     correctAnswers: ["Emmitt Smith", "Trey Burton"],
-    css: "",
+    css: "football.css",
     title: "<h1>Football Trivia!</h1>"
 }
 
@@ -65,6 +66,7 @@ $(document).ready(function(){
     // Start game when dropdown is selected, assign the correct set of properties to the game variable
     $(".selector").on("click", function(){
         game = eval($(this).attr("value"));
+        loadcssFile();
         startGame();
     })
     
@@ -110,6 +112,12 @@ function startGame() {
     $("#question").empty();
     $("#gameTitle").html(game.title);
     nextQuestion();
+  }
+
+  // Function for loading appropriate CSS file
+  function loadcssFile() {
+    $("head").append("<link rel=\"stylesheet\" type=\"text/css\" href=\"assets/css/" + game.css + "\">");
+    console.log(game.css);
   }
 
   // Advance to next question. If no questions remaining, execute end of game function.

@@ -1,0 +1,11 @@
+body {
+    background-image: url("../images/christmasbackground.jpg");
+    background-size: contain;
+    color: red;
+    font-weight: bold;
+}
+
+.card-body {
+    background-image:  url("../images/christmasbackground.jpg");
+    background-size: contain;
+}
