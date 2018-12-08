@@ -62,6 +62,9 @@ var footballGame = {
 }
 
 $(document).ready(function(){
+
+    $(".option").hide();
+    $(".answerPage").hide();
     
     // Start game when dropdown is selected, assign the correct set of properties to the game variable
     $(".selector").on("click", function(){
@@ -76,19 +79,22 @@ $(document).ready(function(){
         clearInterval(clock);  
         remainingQuestions--;
         selectedAnswer = $(this).text();
+        $(".option").hide()
+        $(".answerPage").show();
+        $("#question").empty();
         if (selectedAnswer == game.correctAnswers[currentQuestion]) {
             correctGuess++;
-            $("#question").html("Correct!");
+            $("#rightWrong").html("Correct!");
             $(".option").empty();
-            $("#choice1").html(game.questions[currentQuestion].fact);
-            $("#choice2").html("<img src=" + game.questions[currentQuestion].picture + ">");
+            $("#fact").html(game.questions[currentQuestion].fact);
+            $("#image").html("<img src=" + game.questions[currentQuestion].picture + ">");
         }
         else {
             incorrectGuess++;
-            $("#question").html("Wrong! The correct answer was " + game.correctAnswers[currentQuestion]);
+            $("#rightWrong").html("Wrong! The correct answer was " + game.correctAnswers[currentQuestion]);
             $(".option").empty();
-            $("#choice1").html(game.questions[currentQuestion].fact);
-            $("#choice2").html("<img src=" + game.questions[currentQuestion].picture + ">");
+            $("#fact").html(game.questions[currentQuestion].fact);
+            $("#image").html("<img src=" + game.questions[currentQuestion].picture + ">");
         }
         activeQuestion = false;
         currentQuestion++;
@@ -106,6 +112,7 @@ function startGame() {
     remainingQuestions = game.questions.length;
     console.log(remainingQuestions);
 
+    $(".option").show();
     $("#timebox").html("Time Remaining: <span id=\"timer\">30</span> Seconds");
     $("#welcome").empty();
     $("#topics").hide();
@@ -122,11 +129,13 @@ function startGame() {
 
   // Advance to next question. If no questions remaining, execute end of game function.
 function nextQuestion() {
+    $(".answerPage").empty();
     if (remainingQuestions == 0) {
         endGame();
     }
     else {
     activeQuestion = true;
+    $(".option").show();
     $("#question").html(game.questions[currentQuestion].display);
     $("#choice1").html(game.questions[currentQuestion].choice1).attr("value", game.questions[currentQuestion].choice1);
     $("#choice2").html(game.questions[currentQuestion].choice2).attr("value", game.questions[currentQuestion].choice2);
@@ -138,10 +147,12 @@ function nextQuestion() {
 
 // End game function, display results and show topic selector
 function endGame() {
+    $(".option").show();
     $("#question").html("That's it! Try another topic!");
     $("#choice1").html("You got " + correctGuess + " right");
     $("#choice2").html("You got " + incorrectGuess + " wrong");
     $("#choice3").html("You timed out " + timeouts + " times");
+    $("#choice4").hide();
     $("#topics").show();
     $("#timebox").empty();
 }

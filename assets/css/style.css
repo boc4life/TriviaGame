@@ -1,3 +1,8 @@
 .option {
-    margin: 40px 0 40px 0;
+    margin: 30px 0 30px 0;
+    padding: 10px;
+}
+
+.option:hover {
+    transform: skew(-10deg);
 }
