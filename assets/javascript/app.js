@@ -79,9 +79,7 @@ $(document).ready(function(){
         clearInterval(clock);  
         remainingQuestions--;
         selectedAnswer = $(this).text();
-        $(".option").hide()
-        $(".answerPage").show();
-        $("#question").empty();
+        answerPage();
         if (selectedAnswer == game.correctAnswers[currentQuestion]) {
             correctGuess++;
             $("#rightWrong").html("Correct!");
@@ -171,13 +169,18 @@ function count() {
         clearInterval(clock);
         timeouts++;
         remainingQuestions--;
-        $("#question").html("Out of time! The correct answer was " + game.correctAnswers[currentQuestion]);
-        $(".option").empty();
-        $("#choice1").html(game.questions[currentQuestion].fact);
-        $("#choice2").html("<img src=" + game.questions[currentQuestion].picture + ">");
+        answerPage();
+        $("#rightWrong").html("Out of time! The correct answer was " + game.correctAnswers[currentQuestion]);
+        $("#fact").html(game.questions[currentQuestion].fact);
+        $("#image").html("<img src=" + game.questions[currentQuestion].picture + ">");
         activeQuestion = false;
         currentQuestion++;
         setTimeout(nextQuestion, 5000);
     }
 }
 
+function answerPage() {
+    $(".option").hide()
+    $(".answerPage").show();
+    $("#question").empty();
+}
