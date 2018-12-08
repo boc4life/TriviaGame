@@ -179,6 +179,7 @@ function count() {
     }
 }
 
+// Function for hiding and showing elements during transition page
 function answerPage() {
     $(".option").hide()
     $(".answerPage").show();
